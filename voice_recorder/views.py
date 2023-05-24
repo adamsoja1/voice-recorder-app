@@ -16,7 +16,7 @@ from rest_framework import serializers
 
 
 @api_view(['GET'])
-def home(request,id):
+def home(request):
     record = Record.objects.all()
     serializer = RecordSerializer(record, many=True, context={'request': request})
     return Response(serializer.data)

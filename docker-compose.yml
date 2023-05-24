@@ -6,10 +6,20 @@ services:
     command: >
       sh -c "python manage.py makemigrations &&
              python manage.py migrate &&
-             python manage.py createsuperuser --noinput --username admin --email admin@example.com &&
              echo \"from django.contrib.auth import get_user_model; User = get_user_model(); user = User.objects.get(username='admin'); user.set_password('newpassword'); user.save()\" | python manage.py shell &&
              python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
       - "8000:8000"
+  frontend:
+    build:
+      context: .
+      dockerfile: /home/adam/Desktop/voice-recorder/Dockerfile
+    command: npm start
+    volumes:
+      - /home/adam/Desktop/voice-recorder:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - web
