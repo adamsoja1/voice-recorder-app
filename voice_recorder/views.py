@@ -5,21 +5,37 @@ from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from .serializers import *
 
-from django.core.files.storage import default_storage
-from django.http import HttpResponse
-
-
-from django.core.files.storage import default_storage
-from django.urls import reverse
-from rest_framework import serializers
 
 
 
-@api_view(['GET'])
+
+@api_view(['GET','POST'])
 def home(request):
-    record = Record.objects.all()
-    serializer = RecordSerializer(record, many=True, context={'request': request})
-    return Response(serializer.data)
+    if request.method == "GET":
+        record = Record.objects.all()
+        serializer = RecordSerializer(record, many=True, context={'request': request})
+        return Response(serializer.data)
+    if request.method == "POST":
+        serializer = RecordSerializer(request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
+
+
+from rest_framework.parsers import MultiPartParser, FormParser
+
+from rest_framework import status
+
+@api_view(['POST'])
+def upload(request):
+    print(request.data)
+    serializer = RecordSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
 

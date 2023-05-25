@@ -4,8 +4,9 @@ from . import views
 from django.conf.urls.static import static
 
 urlpatterns = [
-
+    path('upload/',views.upload),
     path('home/',views.home),
+
 
 
 ]

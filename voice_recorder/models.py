@@ -10,10 +10,14 @@ class Record(models.Model):
 
     audio_file = models.FileField(upload_to='records/')
     record = models.ForeignKey('RecordGroup',
-                               on_delete=models.CASCADE)
+                               on_delete=models.CASCADE,
+                               blank=True,
+                               null=True)
 
     author = models.ForeignKey('Author',
-                               on_delete=models.CASCADE)
+                               on_delete=models.CASCADE,
+                               blank=True,
+                               null = True)
 class RecordGroup(models.Model):
     date = models.DateField(default=timezone.now)
     time = models.TimeField(default=datetime.now())

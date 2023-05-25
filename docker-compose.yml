@@ -12,14 +12,3 @@ services:
       - .:/code
     ports:
       - "8000:8000"
-  frontend:
-    build:
-      context: .
-      dockerfile: /home/adam/Desktop/voice-recorder/Dockerfile
-    command: npm start
-    volumes:
-      - /home/adam/Desktop/voice-recorder:/app
-    ports:
-      - "3000:3000"
-    depends_on:
-      - web
