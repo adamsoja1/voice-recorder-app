@@ -1,11 +1,7 @@
-from django.shortcuts import render
-import requests
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from django.http import JsonResponse
 from .serializers import *
-
-
+from rest_framework import status
 
 
 
@@ -21,10 +17,6 @@ def home(request):
             serializer.save()
         return Response(serializer.data)
 
-
-from rest_framework.parsers import MultiPartParser, FormParser
-
-from rest_framework import status
 
 @api_view(['POST'])
 def upload(request):
