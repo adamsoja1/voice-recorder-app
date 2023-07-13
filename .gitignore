@@ -11,9 +11,16 @@ static/
 /media
 media
 media/
+/media
 .idea/
 /.idea
 .idea
+
+
+/migrations
+migrations/
+
+
 db.sqlite3
 db.sqlite3/
 /db.sqlite3
