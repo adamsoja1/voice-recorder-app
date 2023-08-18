@@ -6,7 +6,6 @@ services:
     command: >
       sh -c "python manage.py makemigrations &&
              python manage.py migrate &&
-             echo \"from django.contrib.auth import get_user_model; User = get_user_model(); user = User.objects.get(username='admin'); user.set_password('newpassword'); user.save()\" | python manage.py shell &&
              python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
@@ -15,11 +14,12 @@ services:
     
   frontend:
     build:
-      context: .
+      context: /home/adam/Desktop/voice-recorder/
       dockerfile: /home/adam/Desktop/voice-recorder/Dockerfile
     command: npm start
     volumes:
-      - /home/adam/Desktop/voice-recorder:/app
+      - /home/adam/Desktop/voice-recorder/:/app
+      - /app/node_modules
     ports:
       - "3000:3000"
     depends_on:
