@@ -14,11 +14,11 @@ services:
     
   frontend:
     build:
-      context: /home/adam/Desktop/voice-recorder/
-      dockerfile: /home/adam/Desktop/voice-recorder/Dockerfile
+      context: C:/Users/Bartek/Desktop/1/frontend-recorder/
+      dockerfile: C:/Users/Bartek/Desktop/1/frontend-recorder/Dockerfile
     command: npm start
     volumes:
-      - /home/adam/Desktop/voice-recorder/:/app
+      - C:/Users/Bartek/Desktop/1/frontend-recorder/:/app
       - /app/node_modules
     ports:
       - "3000:3000"

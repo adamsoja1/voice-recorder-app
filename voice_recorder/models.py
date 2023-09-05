@@ -13,10 +13,15 @@ class Record(models.Model):
                                blank=True,
                                null=True)
 
-    author = models.ForeignKey('Author',
+    author = models.ForeignKey('Doctor',
                                on_delete=models.CASCADE,
                                blank=True,
                                null = True)
+    
+    patient = models.ForeignKey('Patient',
+                                on_delete=models.CASCADE,
+                                blank=True,
+                                null = True)
     
 
 
@@ -24,12 +29,28 @@ class RecordGroup(models.Model):
     date = models.DateField(default=timezone.now)
     time = models.TimeField(default=datetime.now())
     def __str__(self):
-        return(str(self.date) + ' ' + str(self.time))
+        return(str(self.date) + '; ' + str(self.time))
 
 
 
-class Author(models.Model):
+
+class Patient(models.Model):
     name = models.CharField(max_length=30)
-
+    pesel = models.CharField(max_length=11)
+    
     def __str__(self):
-        return(self.name)
+        return(str(self.pesel))
+    
+    
+class User(models.Model):
+    name = models.CharField(max_length=30)
+    pesel = models.CharField(max_length=30)
+    role = models.CharField(max_length=15)
+    
+    def __str__(self):
+        return(str(self.name), str(self.pesel), str(self.role))
+    
+    
+class Doctor(User):
+    def __str__(self):
+        return(str(self.name), str(self.pesel))
