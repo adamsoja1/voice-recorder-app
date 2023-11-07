@@ -8,6 +8,7 @@ class Record(models.Model):
     time = models.TimeField(default=datetime.now())
 
     audio_file = models.FileField(upload_to='records/')
+
     record = models.ForeignKey('RecordGroup',
                                on_delete=models.CASCADE,
                                blank=True,
@@ -32,25 +33,14 @@ class RecordGroup(models.Model):
         return(str(self.date) + '; ' + str(self.time))
 
 
-
-
 class Patient(models.Model):
     name = models.CharField(max_length=30)
     pesel = models.CharField(max_length=11)
-    
     def __str__(self):
         return(str(self.pesel))
     
     
-class User(models.Model):
+class Doctor(models.Model):
     name = models.CharField(max_length=30)
-    pesel = models.CharField(max_length=30)
-    role = models.CharField(max_length=15)
-    
-    def __str__(self):
-        return(str(self.name), str(self.pesel), str(self.role))
-    
-    
-class Doctor(User):
     def __str__(self):
         return(str(self.name), str(self.pesel))
